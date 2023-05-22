@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+	<title>SimpleNotes - Dashboard</title>
+</head>
+<body>
+  {% if text != None and text != False and text != "" %}
+    <p>{{text}}</p>
+  {% endif %}
+	<h1>Hello {{user_name}}!</h1>
+  <h2>All Notes</h2>
+  {% if notes == [] %}
+    <p>You don't have any notes!</p>
+  {% endif %}
+  {% for note in notes %}
+    <p>{{note['Desc']}}</p>
+    <a href="/delete/{{note['_id']}}">↑Delete this note↑</a>
+    <br>
+  {% endfor %}
+  <hr>
+  <h2>Add Note</h2>
+  <form action="/addnote" method='POST'>
+    <textarea id="desc" placeholder="simple note..." name="desc" rows="5" cols="40"></textarea>
+    <br>
+    <button class="login-form-button">Add Note</button>
+  </form>
+</body>
+</html>
